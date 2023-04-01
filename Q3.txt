@@ -1,0 +1,28 @@
+1. We need to query the taxonomy table of the database. We can use the following SQL query to find out how many types of tigers can be found in the taxonomy table and the "ncbi_id" of the Sumatran Tiger:
+
+vbnet
+
+SELECT COUNT(*) AS num_tigers, ncbi_id 
+FROM taxonomy 
+WHERE species_name LIKE '%tiger%' 
+GROUP BY ncbi_id;
+
+The query will also use the LIKE operator to search for any species name containing the word "tiger". The result of this query will tell us the number of tiger species and the "ncbi_id" of the Sumatran Tiger.
+
+2. To find all the columns that can be used to connect the tables in the given database, we can look at the foreign key constraints between the tables.
+
+sql
+
+SELECT 
+  CONSTRAINT_NAME, 
+  TABLE_NAME, 
+  COLUMN_NAME, 
+  REFERENCED_TABLE_NAME, 
+  REFERENCED_COLUMN_NAME 
+FROM 
+  INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+WHERE 
+  TABLE_SCHEMA = 'rfam' AND 
+  REFERENCED_TABLE_SCHEMA = 'rfam';
+
+This query will return information about all the foreign keys in the database, with the constraint name, table-name, column-name, referenced_table-name, and referenced_column-name. By inspecting this information, we can find out which columns can be used to connect the tables in the database.

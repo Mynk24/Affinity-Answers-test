@@ -1,0 +1,19 @@
+Here's a shell script that extracts the Scheme Name and Asset Value fields from the provided URL and saves them in a CSV file:
+
+bash
+
+#!/bin/bash
+
+# URL and the output CSV file
+url="https://amfiindia.com/spages/NAVAll.txt"
+output_file="output.csv"
+
+# Use curl to download the file and grep to extract the relevant fields
+curl "$url" | grep -Eo '^[^;]+|;[^;]+$' | tr ';' ',' > "$output_file"
+
+# explaination on how this script works:
+1. define the URL and the output CSV file at the beginning of the script.
+2. 'curl' command to download the contents of the URL.
+3. 'grep' can be used with a regular expression to extract the Scheme Name and Asset Value fields. 
+4. 'tr' command to replace semicolons with commas, which creates a CSV file.
+5. The output is saved to the specified output file.
